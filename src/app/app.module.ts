@@ -6,9 +6,7 @@ import { HeatMapComponent } from './heat-map/heat-map.component';
 import { TopVmsComponent } from './top-vms/top-vms.component';
 import { SourceIpsComponent } from './source-ips/source-ips.component';
 import { RouterModule } from '@angular/router';
-
-
-
+import { NgxEchartsModule } from 'ngx-echarts';
 
 
 @NgModule({
@@ -17,6 +15,7 @@ import { RouterModule } from '@angular/router';
     HeatMapComponent,
     TopVmsComponent,
     SourceIpsComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -26,7 +25,8 @@ import { RouterModule } from '@angular/router';
       { path: 'source-ips', component: SourceIpsComponent},
       { path: '', redirectTo: 'heat-map', pathMatch: 'full' },
       { path: '**', redirectTo: 'heat-map', pathMatch: 'full' },
-    ])
+    ]),
+    NgxEchartsModule,
   ],
   exports: [RouterModule],
   providers: [],

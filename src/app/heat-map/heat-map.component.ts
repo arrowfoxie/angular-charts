@@ -7,11 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeatMapComponent implements OnInit {
 
-  public heatmap = 'heatmap will go here';
+
+
 
   constructor() { }
 
   ngOnInit() {
+
+
   }
 
 }
