@@ -7,7 +7,8 @@ import { TopVmsComponent } from './top-vms/top-vms.component';
 import { SourceIpsComponent } from './source-ips/source-ips.component';
 import { RouterModule } from '@angular/router';
 import { NgxEchartsModule } from 'ngx-echarts';
-
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
       { path: '**', redirectTo: 'heat-map', pathMatch: 'full' },
     ]),
     NgxEchartsModule,
+    HttpClientModule,
+    HttpModule,
   ],
   exports: [RouterModule],
   providers: [],
