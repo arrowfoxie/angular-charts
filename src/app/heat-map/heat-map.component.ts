@@ -48,9 +48,15 @@ export class HeatMapComponent implements OnInit {
           return params.name + ' : ' + params.value;
         }
       },
+      grid: {
+        left: '30%',
+        right: '90%',
+        top: '70%',
+        bottom: 20
+    },
       yAxis: {
         type: 'category',
-        data: _.map(topCountries, 'name'),
+        data: _.map(topCountries, 'name').reverse(),
         axisLabel: {
           color: 'white',
         }
@@ -81,9 +87,12 @@ export class HeatMapComponent implements OnInit {
       },
       series: [
         {
-          name: 'World Population (2010)',
+          id: 'map',
           type: 'map',
           mapType: 'world',
+          top: '10%',
+          bottom: '30%',
+          left: '30%',
           roam: true,
           itemStyle: {
             normal: {
@@ -100,8 +109,24 @@ export class HeatMapComponent implements OnInit {
           data
         },
         {
+          id: 'bar',
           type: 'bar',
-          data: topCountries
+          data: topCountries.reverse(),
+          label: {
+            normal: {
+                show: true,
+                position: 'right',
+                textStyle: {
+                    color: 'white'
+                }
+            },
+            itemStyle: {
+              normal: {
+                  barBorderWidth: '20%',
+
+              }
+          },
+        },
         }
       ]
     };
