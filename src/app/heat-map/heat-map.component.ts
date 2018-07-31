@@ -8,13 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class HeatMapComponent implements OnInit {
 
 
+constructor() { }
 
+ngOnInit() {
 
-  constructor() { }
+}
 
-  ngOnInit() {
-
-
-  }
 
 }
