@@ -14,7 +14,7 @@ declare const require: any;
 })
 export class HeatMapComponent implements OnInit {
 
-  public chartOption: any = {};
+  public heatMap: any = {};
   private mapLoaded = false;
 
   constructor(private http: HttpClient, private es: NgxEchartsService, private heatmapService: HeatMapService) {}
@@ -32,11 +32,11 @@ export class HeatMapComponent implements OnInit {
     // hide loading:
     this.mapLoaded = true;
     this.es.registerMap('world', geoJson);
-    this.chartOption = {
+    this.heatMap = {
       backgroundColor: '#2F3642',
       title: {
           text: 'Geolocation Heat Map',
-          subtext: 'Top Ten Countries',
+          subtext: 'By Top Nine Countries',
 
           textStyle: {
               color: 'rgba(255,255,255, 0.9)'
