@@ -52,17 +52,29 @@ export class HeatMapComponent implements OnInit {
         left: '30%',
         right: '90%',
         top: '70%',
-        bottom: 20
+        bottom: 30
     },
       yAxis: {
         type: 'category',
         data: _.map(topCountries, 'name').reverse(),
         axisLabel: {
-          color: 'white',
-        }
+          color: '#ddd',
+        },
+        axisLine: {
+          show: true,
+          lineStyle: {
+              color: '#ddd',
+          },
+      }
     },
     xAxis: {
-        type: 'value'
+        type: 'value',
+        axisLine: {
+          show: true,
+          lineStyle: {
+              color: '#ddd',
+          },
+      }
     },
       toolbox: {
         show: true,
@@ -76,14 +88,20 @@ export class HeatMapComponent implements OnInit {
         }
       },
       visualMap: {
+        dimension: 0,
+        left: 10,
+        itemWidth: 12,
         min: _.minBy(data, 'value').value,
         max: _.maxBy(data, 'value').value,
         text: ['High', 'Low'],
         realtime: false,
-        calculable: true,
         inRange: {
           color: ['lightskyblue', 'yellow', 'orangered', 'red']
-      }
+      },
+      textStyle: {
+        color: '#ddd'
+    },
+      data
       },
       series: [
         {
@@ -92,7 +110,7 @@ export class HeatMapComponent implements OnInit {
           mapType: 'world',
           top: '10%',
           bottom: '30%',
-          left: '30%',
+          left: '2         0%',
           roam: true,
           itemStyle: {
             normal: {
@@ -103,7 +121,7 @@ export class HeatMapComponent implements OnInit {
                 label: {
                     show: false
                 },
-                areaColor: '#323c48'
+                areaColor: 'black'
             }
         },
           data
@@ -117,14 +135,15 @@ export class HeatMapComponent implements OnInit {
                 show: true,
                 position: 'right',
                 textStyle: {
-                    color: 'white'
+                    color: '#ddd'
                 }
             },
             itemStyle: {
               normal: {
                   barBorderWidth: '20%',
 
-              }
+              },
+              data
           },
         },
         }
