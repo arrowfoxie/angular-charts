@@ -8,9 +8,9 @@ describe('TopVmsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TopVmsComponent ]
+      declarations: [TopVmsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

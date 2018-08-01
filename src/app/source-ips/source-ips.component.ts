@@ -26,79 +26,79 @@ export class SourceIpsComponent implements OnInit {
     public sourceIpChart(data) {
         data = this.sourceIpsService.getSourceIpTotals(data);
         const topIps = _.take(data, 10);
-        console.log(topIps);
-        this.iPs = {backgroundColor: ['#2F3642'],
-        title: {
-            text: 'Top Ten Source IPs',
-            subtext: 'By Threats Blocked',
-            textStyle: {
-                color: '#fff'
-            }
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            },
-            formatter: '{b} <br> Source IP {c}'
-        },
-        /*legend: {
-            data: [date]
-        },*/
-        grid: {
-            left: '4%',
-            right: '4%',
-            bottom: '2%',
-            containLabel: true
-        },
-         xAxis: {
-            type: 'value',
-            boundaryGap: [0, 0.01],
-            interval: 100,
-            axisLabel: {
-                formatter: '{value}',
+        this.iPs = {
+            backgroundColor: ['#2F3642'],
+            title: {
+                text: 'Top Ten Source IPs',
+                subtext: 'By Threats Blocked',
                 textStyle: {
-                    color: '#fff',
-                    fontWeight: '80'
+                    color: '#fff'
                 }
             },
-            axisLine: {
-                show: true,
-                lineStyle: {
-                    color: 'gray',
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                },
+                formatter: '{b} <br> Count: {c}'
+            },
+            /*legend: {
+                data: [date]
+            },*/
+            grid: {
+                left: '4%',
+                right: '4%',
+                bottom: '2%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                boundaryGap: [0, 0.01],
+                interval: 100,
+                axisLabel: {
+                    formatter: '{value}',
+                    textStyle: {
+                        color: '#fff',
+                        fontWeight: '80'
+                    }
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        color: 'gray',
+                    },
+                },
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        color: 'gray',
+                    }
                 },
             },
-            splitLine: {
-                show: true,
-                lineStyle: {
-                    color: 'gray',
-                }
-            },
-        },
-       yAxis: {
-            type: 'category',
-            data: _.map(topIps, 'ip').reverse(),
-            axisLabel: {
-                show: true,
-                interval: 0,
-                rotate: 0,
-                margin: 10,
-                inside: false,
-                textStyle: {
-                    color: '#fff',
-                    fontWeight: '50'
-                }
-            },
-            axisLine: {
-                show: true,
-                lineStyle: {
-                    color: 'gray',
+            yAxis: {
+                type: 'category',
+                data: _.map(topIps, 'ip').reverse(),
+                axisLabel: {
+                    show: true,
+                    interval: 0,
+                    rotate: 0,
+                    margin: 10,
+                    inside: false,
+                    textStyle: {
+                        color: '#fff',
+                        fontWeight: '50'
+                    }
                 },
-            }
-        },
-         visualMap: [{
-            min: _.minBy(data, 'value').value,
-            max: _.maxBy(data, 'value').value,
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        color: 'gray',
+                    },
+                }
+            },
+            visualMap: [{
+                min: _.minBy(data, 'value').value,
+                max: _.maxBy(data, 'value').value,
                 dimension: 0,
                 right: 0,
                 itemWidth: 0,
@@ -109,27 +109,27 @@ export class SourceIpsComponent implements OnInit {
                     color: ['#E7FCD1', '#D7FAB4', '#DEF98E', '#DDFB63', '#C1E045', '#AAC930', '#92AF22', '#7F9624', '#6A7B26', '#566225']
                 }
             }],
-        series: [{
-            type: 'bar',
-            label: {
-                normal: {
-                    show: true,
-                    color: '#fff'
-                }
-            },
-            data: topIps.reverse(),
-             markLine: {
-                lineStyle: {
+            series: [{
+                type: 'bar',
+                label: {
                     normal: {
-                        color: '#ff0000'
+                        show: true,
+                        color: '#fff'
                     }
                 },
-                data: [{
-                    xAxis: 700
-                }],
-            },
-        }]
-    };
+                data: topIps.reverse(),
+                markLine: {
+                    lineStyle: {
+                        normal: {
+                            color: '#ff0000'
+                        }
+                    },
+                    data: [{
+                        xAxis: 700
+                    }],
+                },
+            }]
+        };
 
 
     }

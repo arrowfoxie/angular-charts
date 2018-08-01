@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   public title = 'DYNAMIC THREAT BLOCKING';
 
-  constructor () {
+  constructor() {
   }
 
   ngOnInit() {

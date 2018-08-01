@@ -23,7 +23,7 @@ import { HttpModule } from '@angular/http';
     RouterModule.forRoot([
       { path: 'heat-map', component: HeatMapComponent },
       { path: 'top-vms', component: TopVmsComponent },
-      { path: 'source-ips', component: SourceIpsComponent},
+      { path: 'source-ips', component: SourceIpsComponent },
       { path: '', redirectTo: 'heat-map', pathMatch: 'full' },
       { path: '**', redirectTo: 'heat-map', pathMatch: 'full' },
     ]),
