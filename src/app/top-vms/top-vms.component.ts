@@ -35,8 +35,35 @@ export class TopVmsComponent implements OnInit {
             playInterval: 300,
             loop: false,
             bottom: '2.5%',
+            left: '50%',
             symbolSize: 10,
-            autoPlay: false
+            autoPlay: false,
+            lineStyle: {
+              color: '#ddd'
+          },
+          checkpointStyle: {
+              color: 'red',
+              borderColor: '#ddd',
+              borderWidth: 2
+          },
+          controlStyle: {
+            color: 'white',
+            borderColor: 'white',
+        },
+            label: {
+              normal: {
+                  textStyle: {
+                      color: 'white',
+                      fontSize: 15
+                  }
+              },
+              emphasis: {
+                  textStyle: {
+                      color: 'white',
+                      fontSize: 16
+                  }
+              }
+          },
         },
           baseOption: {
             backgroundColor: ['#2F3642'],
