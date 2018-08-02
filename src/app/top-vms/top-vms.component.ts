@@ -29,6 +29,16 @@ export class TopVmsComponent implements OnInit {
         data = this.topVmsService.getTopVmTotals(data);
         const topVms = _.take(data, 10);
         this.vMs = {
+            timeline: {
+            axisType: 'category',
+            data: ['1990', '1991'],
+            playInterval: 300,
+            loop: false,
+            bottom: '2.5%',
+            symbolSize: 10,
+            autoPlay: false
+        },
+          baseOption: {
             backgroundColor: ['#2F3642'],
             title: {
                 text: 'Top Ten Vms',
@@ -50,7 +60,7 @@ export class TopVmsComponent implements OnInit {
             grid: {
                 left: '4%',
                 right: '4%',
-                bottom: '2%',
+                bottom: '20%',
                 containLabel: true
             },
             xAxis: {
@@ -131,9 +141,10 @@ export class TopVmsComponent implements OnInit {
                     }],
                 },
             }]
-        };
+        },
 
 
-    }
+    };
 }
 
+}

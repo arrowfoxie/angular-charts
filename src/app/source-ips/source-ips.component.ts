@@ -27,6 +27,16 @@ export class SourceIpsComponent implements OnInit {
         data = this.sourceIpsService.getSourceIpTotals(data);
         const topIps = _.take(data, 10);
         this.iPs = {
+            timeline: {
+            axisType: 'category',
+            data: ['1990', '1991'],
+            playInterval: 300,
+            loop: false,
+            bottom: '2.5%',
+            symbolSize: 10,
+            autoPlay: false
+        },
+          baseOption: {
             backgroundColor: ['#2F3642'],
             title: {
                 text: 'Top Ten Source IPs',
@@ -48,7 +58,7 @@ export class SourceIpsComponent implements OnInit {
             grid: {
                 left: '4%',
                 right: '4%',
-                bottom: '2%',
+                bottom: '20%',
                 containLabel: true
             },
             xAxis: {
@@ -128,9 +138,10 @@ export class SourceIpsComponent implements OnInit {
                         xAxis: 700
                     }],
                 },
-            }]
-        };
+            }],
+        },
 
 
-    }
+    };
+}
 }

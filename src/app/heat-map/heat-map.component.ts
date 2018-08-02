@@ -22,17 +22,32 @@ export class HeatMapComponent implements OnInit {
 
   async ngOnInit() {
     const data = await this.heatmapService.getIprmData();
-    this.initializeChart(data);
+    const timeline = await this.heatmapService.getIprmData();
+    this.initializeChart(data, timeline);
   }
 
-  public initializeChart(data) {
+
+
+  public initializeChart(data, timeline) {
     data = this.heatmapService.getCountryTotals(data);
+    timeline = this.heatmapService.getTimelines(timeline);
     const topCountries = _.take(data, 9);
     this.http.get('assets/data/echarts/world.json').subscribe(geoJson => {
       // hide loading:
       this.mapLoaded = true;
       this.es.registerMap('world', geoJson);
       this.heatMap = {
+        timeline: {
+        axisType: 'category',
+        data: ['1990', '1991'],
+        playInterval: 300,
+        loop: false,
+        bottom: '2.5%',
+        left: '50%',
+        symbolSize: 10,
+        autoPlay: false
+    },
+      baseOption: {
         backgroundColor: '#2F3642',
         title: {
           text: 'Geolocation Heat Map',
@@ -89,7 +104,7 @@ export class HeatMapComponent implements OnInit {
         },
         visualMap: {
           dimension: 0,
-          left: 10,
+        right: 10,
           itemWidth: 12,
           min: _.minBy(data, 'value').value,
           max: _.maxBy(data, 'value').value,
@@ -144,8 +159,11 @@ export class HeatMapComponent implements OnInit {
               },
             },
           }
-        ]
-      };
+        ],
+      },
+    };
     });
   }
+
+
 }

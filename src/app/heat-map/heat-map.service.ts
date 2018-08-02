@@ -34,6 +34,7 @@ export class HeatMapService {
   }
 
   public getTimelines(data) {
+    console.log(data);
     return _(data)
 
       .groupBy('hostName')
