@@ -30,4 +30,21 @@ export class TopVmsService {
       .orderBy('value', 'desc')
       .value();
   }
+
+  public getVmTimeline(timeline) {
+    return _(timeline)
+      .flatMap('coreInstanceIdDetail')
+      .groupBy('startTime')
+      .map((detail, time) => {
+        const logs = _(detail).flatMap('ipDetail').sumBy('count');
+        console.log(detail);
+        return {
+          name: time,
+          value: logs
+        };
+
+      })
+      .orderBy('value', 'desc')
+      .value();
+  }
 }

@@ -33,21 +33,23 @@ export class HeatMapService {
       .value();
   }
 
-  public getTimelines(data) {
-    console.log(data);
-    return _(data)
-
-      .groupBy('hostName')
-      .map((detail, host) => {
-        const logs = _(detail).flatMap('coreInstanceIdDetail').flatMap('ipDetail').sumBy('count');
-        return {
-          name: host,
-          value: logs
-        };
-
-      })
-      .orderBy('value', 'desc')
-      .value();
+  public getMapTimeline(timeline) {
+    return _(timeline)
+    .flatMap('coreInstanceIdDetail')
+    .groupBy('startTime')
+    .map((detail, time) => {
+      const logs = _(detail).flatMap('ipDetail').groupBy('countryName').sumBy('count');
+      console.log(time);
+      console.log(detail);
+      console.log(logs);
+      return {
+        time: time,
+        value: logs
+      };
+    })
+    .orderBy('value', 'desc')
+    .value();
   }
+
 }
 

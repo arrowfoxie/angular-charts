@@ -33,5 +33,23 @@ export class SourceIpsService {
       .orderBy('value', 'desc')
       .value();
   }
+
+  public getIpTimeline(timeline) {
+    return _(timeline)
+    .flatMap('coreInstanceIdDetail')
+    .groupBy('startTime')
+    .map((detail, time) => {
+      console.log(time);
+      console.log(detail);
+      return {
+        time: time,
+        value: _.sumBy(detail, 'count')
+      };
+    })
+    .orderBy('value', 'desc')
+    .value();
+  }
+
 }
+
 

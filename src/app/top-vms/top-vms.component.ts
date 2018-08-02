@@ -22,11 +22,14 @@ export class TopVmsComponent implements OnInit {
 
     async ngOnInit() {
         const data = await this.topVmsService.getIprmData();
-        this.topVmsChart(data);
+        const timeline = await this.topVmsService.getIprmData();
+        this.topVmsChart(data, timeline);
     }
 
-    public topVmsChart(data) {
+    public topVmsChart(data, timeline) {
         data = this.topVmsService.getTopVmTotals(data);
+        timeline = this.topVmsService.getVmTimeline(timeline);
+        console.log(timeline);
         const topVms = _.take(data, 10);
         this.vMs = {
             timeline: {

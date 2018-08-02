@@ -20,11 +20,14 @@ export class SourceIpsComponent implements OnInit {
 
     async ngOnInit() {
         const data = await this.sourceIpsService.getIprmData();
-        this.sourceIpChart(data);
+        const timeline = await this.sourceIpsService.getIprmData();
+        this.sourceIpChart(data, timeline);
     }
 
-    public sourceIpChart(data) {
+    public sourceIpChart(data, timeline) {
         data = this.sourceIpsService.getSourceIpTotals(data);
+        timeline = this.sourceIpsService.getIpTimeline(timeline);
+        console.log(timeline);
         const topIps = _.take(data, 10);
         this.iPs = {
             timeline: {

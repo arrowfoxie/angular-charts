@@ -30,7 +30,7 @@ export class HeatMapComponent implements OnInit {
 
   public initializeChart(data, timeline) {
     data = this.heatmapService.getCountryTotals(data);
-    timeline = this.heatmapService.getTimelines(timeline);
+    timeline = this.heatmapService.getMapTimeline(timeline);
     const topCountries = _.take(data, 9);
     this.http.get('assets/data/echarts/world.json').subscribe(geoJson => {
       // hide loading:
