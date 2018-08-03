@@ -28,10 +28,17 @@ export class HeatMapComponent implements OnInit {
 
 
 
-  public initializeChart(data, timeline) {
-    data = this.heatmapService.getCountryTotals(data);
-    timeline = this.heatmapService.getMapTimeline(timeline);
+  public initializeChart(_data, _timeline) {
+    const data = this.heatmapService.getCountryTotals(_data);
+    let timeline = this.heatmapService.getMapTimeline(_timeline);
     const topCountries = _.take(data, 9);
+    const dates = _(_.keys(timeline).sort()).map((key) => {
+      const months = key.slice(0, -13);
+      return months;
+  }).value();
+  timeline = _.map(timeline, (detail) => {
+    return _(detail).orderBy('value', 'desc').take(9).reverse().value();
+  });
     this.http.get('assets/data/echarts/world.json').subscribe(geoJson => {
       // hide loading:
       this.mapLoaded = true;
@@ -39,7 +46,7 @@ export class HeatMapComponent implements OnInit {
       this.heatMap = {
         timeline: {
         axisType: 'category',
-        data: ['1990', '1991'],
+        data: dates,
         playInterval: 300,
         loop: false,
         bottom: '2.5%',
@@ -97,7 +104,7 @@ export class HeatMapComponent implements OnInit {
         },
         yAxis: {
           type: 'category',
-          data: _.map(topCountries, 'name').reverse(),
+          data: [],
           axisLabel: {
             color: '#ddd',
           },
@@ -117,25 +124,13 @@ export class HeatMapComponent implements OnInit {
             },
           }
         },
-        toolbox: {
-          show: true,
-          orient: 'vertical',
-          left: 'right',
-          top: 'center',
-          feature: {
-            dataView: { readOnly: false },
-            restore: {},
-            saveAsImage: {}
-          }
-        },
-        visualMap: {
+        visualMap: [{
           dimension: 0,
         right: 10,
           itemWidth: 12,
           min: _.minBy(data, 'value').value,
           max: _.maxBy(data, 'value').value,
           text: ['High', 'Low'],
-          realtime: false,
           inRange: {
             color: ['lightskyblue', 'red']
           },
@@ -143,7 +138,7 @@ export class HeatMapComponent implements OnInit {
             color: '#ddd'
           },
           data
-        },
+        }],
         series: [
           {
             id: 'map',
@@ -181,12 +176,24 @@ export class HeatMapComponent implements OnInit {
                   barBorderWidth: '20%',
 
                 },
-                data
               },
             },
           }
         ],
       },
+      options: _(timeline).map((value) => {
+
+        return {
+            series: {
+                data: _(value).orderBy('value', 'desc').take(9).value().reverse()
+            },
+            yAxis: {
+                data: _(value).orderBy('value', 'desc').take(9).map('name').value().reverse()
+            }
+        };
+    }).orderBy((obj) => {
+        return obj.series.data[0].time;
+    }).value()
     };
     });
   }

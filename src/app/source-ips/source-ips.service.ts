@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import * as _ from 'lodash';
+import { i18nExpMapping } from '../../../node_modules/@angular/core/src/render3/i18n';
 
 @Injectable({
   providedIn: 'root'
@@ -36,20 +37,23 @@ export class SourceIpsService {
 
   public getIpTimeline(timeline) {
     return _(timeline)
-    .flatMap('coreInstanceIdDetail')
-    .groupBy('startTime')
-    .map((detail, time) => {
-      console.log(time);
-      console.log(detail);
-      return {
-        time: time,
-        value: _.sumBy(detail, 'count')
-      };
-    })
-    .orderBy('value', 'desc')
-    .value();
+      .flatMap('coreInstanceIdDetail')
+      .groupBy('startTime')
+      .flatMap((detail, time) => {
+        const sourceIps = _(detail).flatMap('ipDetail').groupBy('sourceIp');
+        // console.log('sourceIps: ', sourceIps.value());
+        return _(sourceIps).map((ipMapping, ipAddress) => {
+          const count = _(ipMapping).sumBy('count');
+          // console.log('ipAddress: ', ipAddress, ' - count: ', count);
+          return {
+            time: time,
+            name: ipAddress,
+            value: count
+          };
+        }).value();
+      })
+      .orderBy('value', 'desc')
+      .groupBy('time')
+      .value();
   }
-
 }
-
-

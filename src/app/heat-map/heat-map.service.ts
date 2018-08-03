@@ -37,19 +37,21 @@ export class HeatMapService {
     return _(timeline)
     .flatMap('coreInstanceIdDetail')
     .groupBy('startTime')
-    .map((detail, time) => {
-      const logs = _(detail).flatMap('ipDetail').groupBy('countryName').sumBy('count');
-      console.log(time);
-      console.log(detail);
-      console.log(logs);
-      return {
-        time: time,
-        value: logs
-      };
+    .flatMap((detail, time) => {
+      const countryNames = _(detail).flatMap('ipDetail').groupBy('countryName');
+      return _(countryNames).map((countryMapping, countryName) => {
+        const count = _(countryMapping).sumBy('count');
+        return {
+          time: time,
+          name: countryName,
+          value: count
+        };
+      }).value();
     })
     .orderBy('value', 'desc')
+    .groupBy('time')
     .value();
-  }
+}
 
 }
 

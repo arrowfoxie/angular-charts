@@ -36,8 +36,10 @@ export class TopVmsService {
       .flatMap('coreInstanceIdDetail')
       .groupBy('startTime')
       .map((detail, time) => {
-        const logs = _(detail).flatMap('ipDetail').sumBy('count');
+        const logs = _(detail).flatMap('ipDetail').groupBy('sourceIp');
         console.log(detail);
+        console.log(time);
+        console.log(logs);
         return {
           name: time,
           value: logs
