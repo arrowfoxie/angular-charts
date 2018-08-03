@@ -27,11 +27,11 @@ export class SourceIpsComponent implements OnInit {
     public sourceIpChart(_data, _timeline) {
         const data = this.sourceIpsService.getSourceIpTotals(_data);
         let timeline = this.sourceIpsService.getIpTimeline(_timeline);
-
         const dates = _(_.keys(timeline).sort()).map((key) => {
             const months = key.slice(0, -13);
             return months;
         }).value();
+
         timeline = _.map(timeline, (detail) => {
             return _(detail).orderBy('value', 'desc').take(10).reverse().value();
         });
@@ -87,9 +87,6 @@ export class SourceIpsComponent implements OnInit {
                         type: 'shadow'
                     },
                 },
-                /*legend: {
-                    data: [date]
-                },*/
                 grid: {
                     left: '4%',
                     right: '4%',
@@ -141,7 +138,7 @@ export class SourceIpsComponent implements OnInit {
                     },
                     inRange: {
                         color: ['#E7FCD1', '#D7FAB4', '#DEF98E', '#DDFB63', '#C1E045', '#AAC930',
-                         '#92AF22', '#7F9624', '#6A7B26', '#566225']
+                            '#92AF22', '#7F9624', '#6A7B26', '#566225']
                     },
                     data,
                 }],
@@ -166,8 +163,7 @@ export class SourceIpsComponent implements OnInit {
                     },
                 }],
             },
-            options: _(timeline).map((value, key) => {
-                console.log(value);
+            options: _(timeline).map((value) => {
                 return {
                     series: {
                         data: _(value).orderBy('value', 'desc').take(10).value().reverse()
@@ -177,7 +173,6 @@ export class SourceIpsComponent implements OnInit {
                     }
                 };
             }).orderBy((obj) => {
-                console.log(data);
                 return obj.series.data[0].time;
             }).value()
 
