@@ -34,9 +34,16 @@ export class HeatMapComponent implements OnInit {
     const topCountries = _.take(data, 9);
     const dates = _(_.keys(timeline).sort()).map((key) => {
       const months = key.slice(0, -13);
+
       return months;
   }).value();
-  console.log(dates);
+  timeline = _.map(timeline, (detail) => {
+    return _(detail).orderBy('value', 'desc').take(9).reverse().value();
+});
+const countries = _.flatMap(timeline);
+console.log(countries);
+ 
+
     this.http.get('assets/data/echarts/world.json').subscribe(geoJson => {
       // hide loading:
       this.mapLoaded = true;
