@@ -1,0 +1,10 @@
+.bigger {
+    height: 1000px;
+    
+}
+
+@media only screen and (max-width: 600px) {
+    .bigger {
+        height: 500px;
+    }
+}

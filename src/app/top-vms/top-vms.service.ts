@@ -33,18 +33,21 @@ export class TopVmsService {
 
   public getVmTimeline(timeline) {
     return _(timeline)
-      .flatMap('coreInstanceIdDetail')
-      .groupBy('startTime')
-      .map((detail, time) => {
-        const logs = _(detail).flatMap('ipDetail').groupBy('sourceIp');
-        console.log(time);
+    .flatMap('coreInstanceIdDetail')
+    .groupBy('startTime')
+    .flatMap((detail, time) => {
+      const countryNames = _(detail).flatMap('ipDetail').groupBy('countryName');
+      return _(countryNames).map((countryMapping, countryName) => {
+        const count = _(countryMapping).sumBy('count');
         return {
-          name: time,
-          value: logs
+          time: time,
+          name: countryName,
+          value: count
         };
-
-      })
-      .orderBy('value', 'desc')
-      .value();
-  }
+      }).value();
+    })
+    .orderBy('value', 'desc')
+    .groupBy('time')
+    .value();
+}
 }

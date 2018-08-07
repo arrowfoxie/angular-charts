@@ -40,12 +40,15 @@ export class SourceIpsComponent implements OnInit {
             timeline: {
                 axisType: 'category',
                 data: dates,
-                playInterval: 3500,
-                loop: false,
+                playInterval: 10000,
+                loop: true,
                 bottom: '2.5%',
                 left: '40%',
                 symbolSize: 10,
                 autoPlay: false,
+                tooltip: {
+                    show: false
+                  },
                 lineStyle: {
                     color: '#ddd'
                 },
