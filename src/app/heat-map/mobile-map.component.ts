@@ -2,41 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgxEchartsService } from 'ngx-echarts';
 import { HeatMapService } from './heat-map.service';
-import { Observable, fromEvent } from 'rxjs';
-import { startWith, throttleTime, map } from 'rxjs/operators';
+
 
 import * as _ from 'lodash';
 
 declare const require: any;
 
 @Component({
-  selector: 'app-heat-map',
+  selector: 'app-mobile-map',
   templateUrl: './heat-map.component.html',
   styleUrls: ['./heat-map.component.css']
 })
-export class HeatMapComponent implements OnInit {
+export class MobileMapComponent implements OnInit {
 
   public heatMap: any = {};
   private mapLoaded = false;
-  public mobile: any = true;
+
   constructor(private http: HttpClient, private es: NgxEchartsService, private heatmapService: HeatMapService) { }
 
-
   async ngOnInit() {
-    const checkScreenSize = () => document.body.offsetWidth < 1024;
-
-    // Create observable from window resize event throttled so only fires every 500ms
-    const screenSizeChanged$ = fromEvent(window, 'resize').pipe(throttleTime(500), map(checkScreenSize));
-
-    // Start off with the initial value use the isScreenSmall$ | async in the
-    // view to get both the original value and the new value after resize.
-    this.mobile = screenSizeChanged$.pipe(startWith(checkScreenSize()));
+     // Checks if screen size is less than 1024 pixels
     const data = await this.heatmapService.getIprmData();
     const timeline = await this.heatmapService.getIprmData();
     this.initializeChart(data, timeline);
   }
-
-
 
   public initializeChart(data, timeline) {
     data = this.heatmapService.getCountryTotals(data);
@@ -48,13 +37,10 @@ export class HeatMapComponent implements OnInit {
       return months;
     }).value();
 
-
     timeline = _.map(timeline, (detail) => {
       console.log(detail);
       return _(detail).orderBy('value', 'desc').take(10).reverse().value();
     });
-
-
 
 
     this.http.get('assets/data/echarts/world.json').subscribe(geoJson => {
@@ -87,12 +73,7 @@ export class HeatMapComponent implements OnInit {
             borderColor: 'white',
           },
           label: {
-            normal: {
-              textStyle: {
-                color: 'white',
-                fontSize: 15
-              }
-            },
+            show: false,
             emphasis: {
               textStyle: {
                 color: 'white',
@@ -118,11 +99,11 @@ export class HeatMapComponent implements OnInit {
             }
           },
           grid: {
-            left: '30%',
-            right: '90%',
-            top: '75%',
-            bottom: '4%'
-          },
+            left: '4%',
+            right: '4%',
+            bottom: '20%',
+            containLabel: true
+        },
           yAxis: {
             type: 'category',
             data: _.map(topCountries, 'name').reverse(),
@@ -158,8 +139,9 @@ export class HeatMapComponent implements OnInit {
           },
           visualMap: {
             dimension: 0,
-            right: 10,
+            left: 10,
             itemWidth: 12,
+            itemHeight: 40,
             min: _.minBy(data, 'value').value,
             max: _.maxBy(data, 'value').value,
             text: ['High', 'Low'],
@@ -173,25 +155,6 @@ export class HeatMapComponent implements OnInit {
             data
           },
           series: [
-            {
-              id: 'map',
-              type: 'map',
-              mapType: 'world',
-              roam: true,
-              itemStyle: {
-                normal: {
-                  areaColor: '#323c48',
-                  borderColor: '#404a59'
-                },
-                emphasis: {
-                  label: {
-                    show: false
-                  },
-                  areaColor: 'black'
-                }
-              },
-              data
-            },
             {
               id: 'bar',
               type: 'bar',

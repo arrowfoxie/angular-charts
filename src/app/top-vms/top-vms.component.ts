@@ -155,7 +155,8 @@ export class TopVmsComponent implements OnInit {
                         color: '#ddd'
                     },
                     inRange: {
-                        color: ['#E7FCD1', '#D7FAB4', '#DEF98E', '#DDFB63', '#C1E045', '#AAC930', '#92AF22', '#7F9624', '#6A7B26', '#566225']
+                        color: ['#E7FCD1', '#D7FAB4', '#DEF98E', '#DDFB63', '#C1E045', '#AAC930',
+                        '#92AF22', '#7F9624', '#6A7B26', '#566225']
                     }
                 }],
                 series: [{

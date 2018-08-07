@@ -1,16 +1,25 @@
 .bigger {
-    height: 1000px;
+    height: 85vh;
     
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1280px) {
     .bigger {
-        height: 500px;
+        height: 768px;
+        overflow: hidden !important;
     }
 }
 
 @media only screen and (max-width: 768px) {
     .bigger {
+        height: 600px;
+        overflow: hidden !important;
+    }
+}
+
+@media only screen and (max-width: 544px) {
+    .bigger {
         height: 500px;
+        overflow: hidden !important;
     }
 }
