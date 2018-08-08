@@ -54,9 +54,8 @@ export class MobileMapComponent implements OnInit {
           playInterval: 8000,
           loop: false,
           bottom: '2.5%',
-          left: '50%',
-          symbolSize: 10,
-          autoPlay: true,
+          left: '30%',
+          symbolSize: 8,
           tooltip: {
             show: false
           },
@@ -69,8 +68,7 @@ export class MobileMapComponent implements OnInit {
             borderWidth: 2
           },
           controlStyle: {
-            color: 'white',
-            borderColor: 'white',
+            show: false,
           },
           label: {
             show: false,

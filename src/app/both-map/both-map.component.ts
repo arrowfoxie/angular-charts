@@ -10,7 +10,7 @@ import { startWith, throttleTime, map } from 'rxjs/operators';
 })
 export class BothMapComponent implements OnInit {
 
-  public mobile: any = true;
+  public mobile: any = document.body.offsetWidth < 1024;
 
   constructor() { }
 
