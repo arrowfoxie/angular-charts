@@ -15,7 +15,7 @@ declare const require: any;
 export class SourceIpsComponent implements OnInit {
 
     public iPs: any = {};
-
+    public ipmobile: any = true;
     constructor(private http: HttpClient, private es: NgxEchartsService, private sourceIpsService: SourceIpsService) { }
 
     async ngOnInit() {

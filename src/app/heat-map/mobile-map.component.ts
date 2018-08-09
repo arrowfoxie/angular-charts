@@ -21,7 +21,6 @@ export class MobileMapComponent implements OnInit {
   constructor(private http: HttpClient, private es: NgxEchartsService, private heatmapService: HeatMapService) { }
 
   async ngOnInit() {
-     // Checks if screen size is less than 1024 pixels
     const data = await this.heatmapService.getIprmData();
     const timeline = await this.heatmapService.getIprmData();
     this.initializeChart(data, timeline);

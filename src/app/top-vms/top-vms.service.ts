@@ -32,22 +32,25 @@ export class TopVmsService {
   }
 
   public getVmTimeline(timeline) {
+    console.log(timeline);
     return _(timeline)
-    .flatMap('coreInstanceIdDetail')
-    .groupBy('startTime')
-    .flatMap((detail, time) => {
-      const countryNames = _(detail).flatMap('ipDetail').groupBy('countryName');
-      return _(countryNames).map((countryMapping, countryName) => {
-        const count = _(countryMapping).sumBy('count');
-        return {
-          time: time,
-          name: countryName,
-          value: count
-        };
-      }).value();
-    })
-    .orderBy('value', 'desc')
-    .groupBy('time')
-    .value();
-}
+      .groupBy('hostName')
+      .flatMap((hostDetail, hostName) => {
+        return _(hostDetail).flatMap('coreInstanceIdDetail').map((detail) => {
+          console.log(hostName, detail);
+          return {
+            name: hostName,
+            startTime: detail.startTime,
+            value: _.sumBy(detail.ipDetail, 'count')
+          };
+        }).value();
+      })
+      .groupBy('startTime')
+      .value();
+  }
+
+  public calculateCountryTotals(ipDetail) {
+    console.log(ipDetail);
+    return _(ipDetail);
+  }
 }

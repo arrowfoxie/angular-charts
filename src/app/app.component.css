@@ -74,8 +74,8 @@ a:hover {
 }
 
 .dropdown-inner {
-  min-width: 100%;
-  padding: 1rem 0rem 0rem 1rem;
+  min-width: 93%;
+  padding: 0rem 0rem 0rem 1rem;
   background: #fff;
   border: #aaa solid 1px;
   border-radius: 3px;

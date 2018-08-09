@@ -15,13 +15,13 @@
           <div class="dropdown-inner">
             <ul>
               <li>
-                <a [routerLink]="['/heat-map']">Geolocation Heat Map</a>
+                <a [routerLink]="['/heat-map']" onclick="location.reload(true); return false;" >Geolocation Heat Map</a>
               </li>
               <li>
-                <a [routerLink]="['/top-vms']">Top 10 VMs</a>
+                <a [routerLink]="['/top-vms']" onclick="location.reload(true); return false;">Top 10 VMs</a>
               </li>
               <li>
-                <a [routerLink]="['/source-ips']">Top 10 Source IPs</a>
+                <a [routerLink]="['/source-ips']" onclick="location.reload(true); return false;">Top 10 Source IPs</a>
               </li>
             </ul>
           </div>

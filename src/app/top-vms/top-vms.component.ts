@@ -34,7 +34,7 @@ export class TopVmsComponent implements OnInit {
             const months = key.slice(0, -13);
             return months;
         }).value();
-        console.log(dates);
+        console.log(timeline);
         this.vMs = {
             timeline: {
                 axisType: 'category',
@@ -126,7 +126,7 @@ export class TopVmsComponent implements OnInit {
                 },
                 yAxis: {
                     type: 'category',
-                    data: _.map(topVms, 'name').reverse(),
+                    data: _.map(topVms, 'name').sort(),
                     axisLabel: {
                         show: true,
                         interval: 0,
@@ -155,8 +155,8 @@ export class TopVmsComponent implements OnInit {
                         color: '#ddd'
                     },
                     inRange: {
-                        color: ['#E7FCD1', '#D7FAB4', '#DEF98E', '#DDFB63', '#C1E045', '#AAC930',
-                        '#92AF22', '#7F9624', '#6A7B26', '#566225']
+                        color: ['#C1E045', '#AAC930',
+                        '#92AF22', '#7F9624', '#6A7B26']
                     }
                 }],
                 series: [{
@@ -168,7 +168,6 @@ export class TopVmsComponent implements OnInit {
                             color: '#fff'
                         }
                     },
-                    data: topVms.reverse(),
                     markLine: {
                         lineStyle: {
                             normal: {
@@ -183,6 +182,15 @@ export class TopVmsComponent implements OnInit {
             },
 
 
+            options: _(timeline).map((value) => {
+                return {
+                    series: {
+                        data: value
+                    },
+                };
+            }).orderBy((obj) => {
+                return obj.series.data[0].time;
+            }).value()
         };
     }
 
