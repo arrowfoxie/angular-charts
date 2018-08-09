@@ -67,7 +67,9 @@ export class MobileMapComponent implements OnInit {
             borderWidth: 2
           },
           controlStyle: {
-            show: false,
+            show: true,
+            color: 'white',
+            borderColor: 'white'
           },
           label: {
             show: false,

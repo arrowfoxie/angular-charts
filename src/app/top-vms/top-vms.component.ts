@@ -30,11 +30,15 @@ export class TopVmsComponent implements OnInit {
         data = this.topVmsService.getTopVmTotals(data);
         timeline = this.topVmsService.getVmTimeline(timeline);
         const topVms = _.take(data, 10);
+        const topValues = _.flatMap(timeline);
         const dates = _(_.keys(timeline).sort()).map((key) => {
             const months = key.slice(0, -13);
             return months;
         }).value();
-        console.log(timeline);
+        const order = _.flatMap(timeline);
+        const order2 = _.sortBy(order, 'value').reverse();
+        const vmsByValue = _.groupBy(order2, 'name');
+         console.log(vmsByValue);
         this.vMs = {
             timeline: {
                 axisType: 'category',
@@ -103,7 +107,7 @@ export class TopVmsComponent implements OnInit {
                 xAxis: {
                     type: 'value',
                     boundaryGap: [0, 0.01],
-                    interval: 4000,
+                    interval: 1000,
                     axisLabel: {
                         formatter: '{value}',
                         textStyle: {
@@ -126,7 +130,7 @@ export class TopVmsComponent implements OnInit {
                 },
                 yAxis: {
                     type: 'category',
-                    data: _.map(topVms, 'name').sort(),
+                    data: _.map(topVms, 'name'),
                     axisLabel: {
                         show: true,
                         interval: 0,
@@ -146,17 +150,18 @@ export class TopVmsComponent implements OnInit {
                     }
                 },
                 visualMap: [{
-                    min: _.minBy(data, 'name').value,
-                    max: _.maxBy(data, 'name').value,
+                    min: _.minBy(topValues, 'name').value,
+                    max: _.maxBy(topValues, 'name').value,
                     dimension: 0,
-                    right: 0,
-                    itemWidth: 0,
+                    left: 0,
+                    itemWidth: 12,
+                    itemHeight: 70,
                     textStyle: {
                         color: '#ddd'
                     },
                     inRange: {
-                        color: ['#C1E045', '#AAC930',
-                        '#92AF22', '#7F9624', '#6A7B26']
+                        color: ['#E7FCD1', '#D7FAB4', '#DEF98E', '#DDFB63', '#C1E045', '#AAC930',
+                            '#92AF22', '#7F9624', '#6A7B26', '#566225']
                     }
                 }],
                 series: [{
@@ -183,10 +188,14 @@ export class TopVmsComponent implements OnInit {
 
 
             options: _(timeline).map((value) => {
+                const ordered = _(value).orderBy('value', 'desc').take(10).reverse();
                 return {
                     series: {
-                        data: value
+                        data: ordered.value()
                     },
+                    yAxis: {
+                        data: ordered.map('name').value()
+                    }
                 };
             }).orderBy((obj) => {
                 return obj.series.data[0].time;

@@ -32,12 +32,10 @@ export class TopVmsService {
   }
 
   public getVmTimeline(timeline) {
-    console.log(timeline);
     return _(timeline)
       .groupBy('hostName')
       .flatMap((hostDetail, hostName) => {
         return _(hostDetail).flatMap('coreInstanceIdDetail').map((detail) => {
-          console.log(hostName, detail);
           return {
             name: hostName,
             startTime: detail.startTime,
