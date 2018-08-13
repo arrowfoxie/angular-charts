@@ -35,7 +35,7 @@ export class SourceIpsComponent implements OnInit {
         timeline = _.map(timeline, (detail) => {
             return _(detail).orderBy('value', 'desc').take(10).reverse().value();
         });
-        console.log(data);
+        console.log(timeline);
         this.iPs = {
             timeline: {
                 axisType: 'category',

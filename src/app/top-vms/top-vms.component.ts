@@ -35,10 +35,7 @@ export class TopVmsComponent implements OnInit {
             const months = key.slice(0, -13);
             return months;
         }).value();
-        const order = _.flatMap(timeline);
-        const order2 = _.sortBy(order, 'value').reverse();
-        const vmsByValue = _.groupBy(order2, 'name');
-         console.log(vmsByValue);
+console.log(timeline);
         this.vMs = {
             timeline: {
                 axisType: 'category',
