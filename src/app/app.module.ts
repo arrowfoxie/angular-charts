@@ -11,14 +11,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { MobileMapComponent } from './heat-map/mobile-map.component';
 import { BothMapComponent } from './both-map/both-map.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrandkitModule } from '@armor/brandkit';
 
 const desktop_routes: Routes = [
-{ path: 'heat-map', component: BothMapComponent },
-{ path: 'top-vms', component: TopVmsComponent },
-{ path: 'source-ips', component: SourceIpsComponent },
-{ path: '', redirectTo: 'heat-map', pathMatch: 'full' },
-{ path: '**', redirectTo: 'heat-map', pathMatch: 'full' },
+  { path: 'heat-map', component: BothMapComponent },
+  { path: 'top-vms', component: TopVmsComponent },
+  { path: 'source-ips', component: SourceIpsComponent },
+  { path: '', redirectTo: 'heat-map', pathMatch: 'full' },
+  { path: '**', redirectTo: 'heat-map', pathMatch: 'full' },
 
 ];
 
@@ -37,10 +38,12 @@ const desktop_routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(desktop_routes, {preloadingStrategy: PreloadAllModules}),
+    RouterModule.forRoot(desktop_routes, { preloadingStrategy: PreloadAllModules }),
     NgxEchartsModule,
     HttpClientModule,
     HttpModule,
+    NgbModule,
+    BrandkitModule
   ],
   exports: [RouterModule],
   providers: [],

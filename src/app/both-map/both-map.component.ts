@@ -6,7 +6,7 @@ import { startWith, throttleTime, map } from 'rxjs/operators';
 @Component({
   selector: 'app-both-map',
   templateUrl: './both-map.component.html',
-  styleUrls: ['./both-map.component.css']
+  styleUrls: ['./both-map.component.scss']
 })
 export class BothMapComponent implements OnInit {
 
@@ -24,7 +24,7 @@ export class BothMapComponent implements OnInit {
     // view to get both the original value and the new value after resize.
     screenSizeChanged$.subscribe((result) => {
       this.mobile = result;
-      });
+    });
   }
 
 }

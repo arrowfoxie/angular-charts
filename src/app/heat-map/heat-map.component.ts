@@ -10,7 +10,7 @@ declare const require: any;
 @Component({
   selector: 'app-heat-map',
   templateUrl: './heat-map.component.html',
-  styleUrls: ['./heat-map.component.css']
+  styleUrls: ['./heat-map.component.scss']
 })
 export class HeatMapComponent implements OnInit {
 
@@ -40,7 +40,7 @@ export class HeatMapComponent implements OnInit {
     timeline = _.map(timeline, (detail) => {
       return _(detail).orderBy('value', 'desc').take(9).value();
     });
-console.log(timeline);
+    console.log(timeline);
 
     this.http.get('assets/data/echarts/world.json').subscribe(geoJson => {
       // hide loading:
@@ -130,17 +130,6 @@ console.log(timeline);
               },
             }
           },
-          toolbox: {
-            show: true,
-            orient: 'vertical',
-            left: 'right',
-            top: 'center',
-            feature: {
-              dataView: { readOnly: false },
-              restore: {},
-              saveAsImage: {}
-            }
-          },
           visualMap: {
             dimension: 0,
             right: 10,
@@ -203,16 +192,16 @@ console.log(timeline);
         options: _(timeline).map((value) => {
           const ordered = _(value).orderBy('value', 'desc').take(10).reverse();
           return {
-              series: {
-                  data: ordered.value()
-              },
-              yAxis: {
-                  data: ordered.map('name').value()
-              },
+            series: {
+              data: ordered.value()
+            },
+            yAxis: {
+              data: ordered.map('name').value()
+            },
           };
-      }).orderBy((obj) => {
+        }).orderBy((obj) => {
           return obj.series.data[0].time;
-      }).value()
+        }).value()
       };
     });
   }

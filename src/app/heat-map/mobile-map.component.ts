@@ -11,7 +11,7 @@ declare const require: any;
 @Component({
   selector: 'app-mobile-map',
   templateUrl: './heat-map.component.html',
-  styleUrls: ['./heat-map.component.css']
+  styleUrls: ['./heat-map.component.scss']
 })
 export class MobileMapComponent implements OnInit {
 
@@ -37,7 +37,6 @@ export class MobileMapComponent implements OnInit {
     }).value();
 
     timeline = _.map(timeline, (detail) => {
-      console.log(detail);
       return _(detail).orderBy('value', 'desc').take(10).reverse().value();
     });
 
@@ -102,7 +101,7 @@ export class MobileMapComponent implements OnInit {
             right: '4%',
             bottom: '20%',
             containLabel: true
-        },
+          },
           yAxis: {
             type: 'category',
             data: _.map(topCountries, 'name').reverse(),
@@ -123,17 +122,6 @@ export class MobileMapComponent implements OnInit {
               lineStyle: {
                 color: '#ddd',
               },
-            }
-          },
-          toolbox: {
-            show: true,
-            orient: 'vertical',
-            left: 'right',
-            top: 'center',
-            feature: {
-              dataView: { readOnly: false },
-              restore: {},
-              saveAsImage: {}
             }
           },
           visualMap: {

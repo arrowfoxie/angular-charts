@@ -21,10 +21,12 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              { "glob": "**/*.json", "input": "node_modules/echarts/map/json/", "output": "/assets/data/echarts/" }
+              { "glob": "**/*.json", "input": "node_modules/echarts/map/json/", "output": "/assets/data/echarts/" },
+              { "glob": "**/*.css", "input": "node_modules/@armor/brandkit/assets", "output": "/assets" }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles/styles.scss",
+              "src/styles/themes/theme-dark.scss"
             ],
             "scripts": [
               "node_modules/echarts/dist/echarts.min.js",
@@ -127,5 +129,14 @@
       }
     }
   },
-  "defaultProject": "charts"
+  "defaultProject": "charts",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "app",
+      "styleext": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "app"
+    }
+  }
 }

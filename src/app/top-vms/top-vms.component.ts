@@ -10,7 +10,7 @@ declare const require: any;
 @Component({
     selector: 'app-top-vms',
     templateUrl: './top-vms.component.html',
-    styleUrls: ['./top-vms.component.css']
+    styleUrls: ['./top-vms.component.scss']
 })
 export class TopVmsComponent implements OnInit {
 
@@ -35,7 +35,6 @@ export class TopVmsComponent implements OnInit {
             const months = key.slice(0, -13);
             return months;
         }).value();
-console.log(timeline);
         this.vMs = {
             timeline: {
                 axisType: 'category',

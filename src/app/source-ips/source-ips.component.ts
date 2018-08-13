@@ -10,7 +10,7 @@ declare const require: any;
 @Component({
     selector: 'app-source-ips',
     templateUrl: './source-ips.component.html',
-    styleUrls: ['./source-ips.component.css']
+    styleUrls: ['./source-ips.component.scss']
 })
 export class SourceIpsComponent implements OnInit {
 
@@ -48,7 +48,7 @@ export class SourceIpsComponent implements OnInit {
                 autoPlay: false,
                 tooltip: {
                     show: false
-                  },
+                },
                 lineStyle: {
                     color: '#ddd'
                 },
