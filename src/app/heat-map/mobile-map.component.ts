@@ -165,6 +165,26 @@ export class MobileMapComponent implements OnInit {
             }
           ],
         },
+        options: _(timeline).map((value) => {
+          const ordered = _(value).orderBy('value', 'desc').take(10).reverse();
+          return {
+            series: [{
+              data: ordered.value(),
+              id: 'bar',
+              type: 'bar',
+            },
+           ],
+            yAxis: {
+              data: ordered.map('name').value()
+            },
+            visualMap: {
+              min: ordered.minBy('value').value,
+              max: ordered.maxBy('value').value,
+            }
+          };
+        }).orderBy((obj) => {
+          return obj.series[0].data[0].time;
+        }).value()
       };
     });
   }
