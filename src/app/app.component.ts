@@ -23,6 +23,7 @@ export class AppComponent implements AfterViewInit {
     new QuickNavOption('Geolocation Heat Map', 'heat-map'),
     new QuickNavOption('Top Ten VMs', 'top-vms'),
     new QuickNavOption('Top Ten Source Ips', 'source-ips'),
+    new QuickNavOption('Zero State View', 'zero-state'),
   ];
 
   public ngAfterViewInit(): void {

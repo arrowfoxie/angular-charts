@@ -166,7 +166,7 @@ export class MobileMapComponent implements OnInit {
           ],
         },
         options: _(timeline).map((value) => {
-          const ordered = _(value).orderBy('value', 'desc').take(10).reverse();
+          const ordered = _(value).orderBy('value', 'desc').take(9).reverse();
           return {
             series: [{
               data: ordered.value(),

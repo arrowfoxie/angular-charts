@@ -41,6 +41,7 @@ export class HeatMapComponent implements OnInit {
     timeline = _.map(timeline, (detail) => {
       return _(detail).orderBy('value', 'desc').take(9).value();
     });
+    console.log(timeline);
     this.http.get('assets/data/echarts/world.json').subscribe(geoJson => {
       // hide loading:
       this.mapLoaded = true;
