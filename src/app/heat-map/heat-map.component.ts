@@ -35,12 +35,18 @@ export class HeatMapComponent implements OnInit {
     const dates = _(_.keys(timeline).sort()).map((key) => {
       const months = key.slice(0, -13);
 
+
       return months;
     }).value();
     timeline = _.map(timeline, (detail) => {
       return _(detail).orderBy('value', 'desc').take(9).value();
     });
-    console.log(timeline);
+
+console.log(data);
+const times = _.flatMap(timeline);
+console.log(times);
+const times2 = _.groupBy(times, 'time');
+console.log(times2);
 
     this.http.get('assets/data/echarts/world.json').subscribe(geoJson => {
       // hide loading:
@@ -143,8 +149,7 @@ export class HeatMapComponent implements OnInit {
             },
             textStyle: {
               color: '#ddd'
-            },
-            data
+            }
           },
           series: [
             {
@@ -164,12 +169,11 @@ export class HeatMapComponent implements OnInit {
                   areaColor: 'black'
                 }
               },
-              data
+              data: [],
             },
             {
               id: 'bar',
               type: 'bar',
-              data: _.map(topCountries, 'value').reverse(),
               label: {
                 normal: {
                   show: true,
@@ -183,7 +187,6 @@ export class HeatMapComponent implements OnInit {
                     barBorderWidth: '20%',
 
                   },
-                  data
                 },
               },
             }
@@ -192,15 +195,27 @@ export class HeatMapComponent implements OnInit {
         options: _(timeline).map((value) => {
           const ordered = _(value).orderBy('value', 'desc').take(10).reverse();
           return {
-            series: {
-              data: ordered.value()
+            series: [ {
+              data: ordered.value(),
+              id: 'map',
+              type: 'map',
+              mapType: 'world',
+            }, {
+              data: ordered.value(),
+              id: 'bar',
+              type: 'bar',
             },
+           ],
             yAxis: {
               data: ordered.map('name').value()
             },
+            visualMap: {
+              min: ordered.minBy('value').value,
+              max: ordered.maxBy('value').value,
+            }
           };
         }).orderBy((obj) => {
-          return obj.series.data[0].time;
+          return obj.series[0].data[0].time;
         }).value()
       };
     });
