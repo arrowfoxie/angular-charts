@@ -33,15 +33,12 @@ export class HeatMapComponent implements OnInit {
     timeline = this.heatmapService.getMapTimeline(timeline);
     const topCountries = _.take(data, 9);
     const dates = _(_.keys(timeline).sort()).map((key) => {
-      const months = key.slice(0, -13);
-
-
+      const months = key.slice(2, -13);
       return months;
     }).value();
     timeline = _.map(timeline, (detail) => {
       return _(detail).orderBy('value', 'desc').take(9).value();
     });
-    console.log(timeline);
     this.http.get('assets/data/echarts/world.json').subscribe(geoJson => {
       // hide loading:
       this.mapLoaded = true;
@@ -87,7 +84,7 @@ export class HeatMapComponent implements OnInit {
           },
         },
         baseOption: {
-          backgroundColor: '#2F3642',
+          backgroundColor: '#333333',
           title: {
             text: 'Geolocation Heat Map',
             subtext: 'By Top Nine Countries',
@@ -154,7 +151,7 @@ export class HeatMapComponent implements OnInit {
               itemStyle: {
                 normal: {
                   areaColor: '#323c48',
-                  borderColor: '#404a59'
+                  borderColor: '#59627a'
                 },
                 emphasis: {
                   label: {
@@ -189,7 +186,7 @@ export class HeatMapComponent implements OnInit {
         options: _(timeline).map((value) => {
           const ordered = _(value).orderBy('value', 'desc').take(10).reverse();
           return {
-            series: [ {
+            series: [{
               data: ordered.value(),
               id: 'map',
               type: 'map',
@@ -199,7 +196,7 @@ export class HeatMapComponent implements OnInit {
               id: 'bar',
               type: 'bar',
             },
-           ],
+            ],
             yAxis: {
               data: ordered.map('name').value()
             },

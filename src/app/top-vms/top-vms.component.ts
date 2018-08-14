@@ -32,7 +32,7 @@ export class TopVmsComponent implements OnInit {
         const topVms = _.take(data, 10);
         const topValues = _.flatMap(timeline);
         const dates = _(_.keys(timeline).sort()).map((key) => {
-            const months = key.slice(0, -13);
+            const months = key.slice(2, -13);
             return months;
         }).value();
         this.vMs = {
@@ -46,7 +46,7 @@ export class TopVmsComponent implements OnInit {
                 symbolSize: 10,
                 autoPlay: false,
                 tooltip: {
-                    show: false
+                    show: true
                 },
                 lineStyle: {
                     color: '#ddd'
@@ -76,7 +76,7 @@ export class TopVmsComponent implements OnInit {
                 },
             },
             baseOption: {
-                backgroundColor: ['#2F3642'],
+                backgroundColor: ['#333333'],
                 title: {
                     text: 'Top Ten Vms',
                     subtext: 'By Threats Blocked',

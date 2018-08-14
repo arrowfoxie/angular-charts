@@ -19,19 +19,16 @@ export class ZeroStateComponent {
 
 
 
- public heatMap: any =  {
-  series : [
+  public heatMap: any = {
+    series: [
       {
-          name: 'World Population (2010)',
-          type: 'map',
-          mapType: 'world',
-          roam: true,
-          mapLocation: {
-              y : 60
-          },
+        type: 'map',
+        mapType: 'world',
+        roam: true,
+        mapLocation: {
+          y: 20
+        },
       }
-  ]
- };
+    ]
+  };
 }
-
-

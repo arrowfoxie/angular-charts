@@ -31,13 +31,13 @@ export class MobileMapComponent implements OnInit {
     timeline = this.heatmapService.getMapTimeline(timeline);
     const topCountries = _.take(data, 9);
     const dates = _(_.keys(timeline).sort()).map((key) => {
-      const months = key.slice(0, -13);
+      const months = key.slice(2, -13);
 
       return months;
     }).value();
 
     timeline = _.map(timeline, (detail) => {
-      return _(detail).orderBy('value', 'desc').take(10).reverse().value();
+      return _(detail).orderBy('value', 'desc').take(9).reverse().value();
     });
 
 
@@ -50,7 +50,7 @@ export class MobileMapComponent implements OnInit {
           axisType: 'category',
           data: dates,
           playInterval: 8000,
-          loop: false,
+          loop: true,
           bottom: '2.5%',
           left: '30%',
           symbolSize: 8,
@@ -71,11 +71,10 @@ export class MobileMapComponent implements OnInit {
             borderColor: 'white'
           },
           label: {
-            show: false,
-            emphasis: {
+            normal: {
               textStyle: {
                 color: 'white',
-                fontSize: 16
+                fontSize: 12
               }
             }
           },
@@ -173,7 +172,7 @@ export class MobileMapComponent implements OnInit {
               id: 'bar',
               type: 'bar',
             },
-           ],
+            ],
             yAxis: {
               data: ordered.map('name').value()
             },

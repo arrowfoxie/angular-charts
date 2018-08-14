@@ -28,7 +28,7 @@ export class SourceIpsComponent implements OnInit {
         const data = this.sourceIpsService.getSourceIpTotals(_data);
         let timeline = this.sourceIpsService.getIpTimeline(_timeline);
         const dates = _(_.keys(timeline).sort()).map((key) => {
-            const months = key.slice(0, -13);
+            const months = key.slice(2, -13);
             return months;
         }).value();
 
@@ -77,7 +77,7 @@ export class SourceIpsComponent implements OnInit {
                 },
             },
             baseOption: {
-                backgroundColor: ['#2F3642'],
+                backgroundColor: ['#333333'],
                 title: {
                     text: 'Top Ten Source IPs',
                     subtext: 'By Threats Blocked',
