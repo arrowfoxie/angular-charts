@@ -46,7 +46,7 @@ export class HeatMapComponent implements OnInit {
         timeline: {
           axisType: 'category',
           data: dates,
-          playInterval: 8000,
+          playInterval: 5000,
           loop: true,
           bottom: '2.5%',
           left: '50%',

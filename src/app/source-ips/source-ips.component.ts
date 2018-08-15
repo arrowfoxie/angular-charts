@@ -42,7 +42,7 @@ export class SourceIpsComponent implements OnInit {
             timeline: {
                 axisType: 'category',
                 data: dates,
-                playInterval: 10000,
+                playInterval: 5000,
                 loop: true,
                 bottom: '2.5%',
                 left: '40%',
