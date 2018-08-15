@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { NgxEchartsService } from 'ngx-echarts';
+
 import { TopVmsService } from './top-vms.service';
 
 import * as _ from 'lodash';
@@ -14,9 +16,7 @@ declare const require: any;
 })
 export class TopVmsComponent implements OnInit {
 
-
     public vMs: any = {};
-
 
     constructor(private http: HttpClient, private es: NgxEchartsService, private topVmsService: TopVmsService) { }
 
@@ -39,12 +39,12 @@ export class TopVmsComponent implements OnInit {
             timeline: {
                 axisType: 'category',
                 data: dates,
-                playInterval: 10000,
+                playInterval: 5000,
                 loop: true,
                 bottom: '2.5%',
                 left: '40%',
                 symbolSize: 10,
-                autoPlay: false,
+                autoPlay: true,
                 tooltip: {
                     show: true
                 },
@@ -149,7 +149,7 @@ export class TopVmsComponent implements OnInit {
                     min: _.minBy(topValues, 'name').value,
                     max: _.maxBy(topValues, 'name').value,
                     dimension: 0,
-                    left: 0,
+                    right: 0,
                     itemWidth: 12,
                     itemHeight: 70,
                     textStyle: {
@@ -176,7 +176,7 @@ export class TopVmsComponent implements OnInit {
                             }
                         },
                         data: [{
-                            xAxis: 16000
+                            xAxis: 2500
                         }],
                     },
                 }]

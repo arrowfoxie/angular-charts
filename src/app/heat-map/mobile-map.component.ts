@@ -80,7 +80,7 @@ export class MobileMapComponent implements OnInit {
           },
         },
         baseOption: {
-          backgroundColor: '#2F3642',
+          backgroundColor: '#333333',
           title: {
             text: 'Geolocation Heat Map',
             subtext: 'By Top Nine Countries',

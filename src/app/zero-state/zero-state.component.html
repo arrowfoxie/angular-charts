@@ -4,6 +4,21 @@
   <i class="ico ico-info-circle-full" ngbTooltip="This is a zero state view that would show when there is no data available."
     placement="right"></i>
 </h2>
-
-
+<div class="float">
+  <button class="btn btn-xs btn-primary block" (click)="open(content)">show modal</button>
+</div>
 <div class="bigger" echarts [options]="heatMap"></div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <modal>
+    <modal-header title="Whoops" [dismiss]="d"></modal-header>
+    <modal-body id="center">
+      <p>Looks like we can't find your data.</p>
+      <img src="../../assets/Picture3.png">
+
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="c('Okay click')">Aw jeez</button>
+    </modal-footer>
+  </modal>
+</ng-template>

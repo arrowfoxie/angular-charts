@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { NgxEchartsService } from 'ngx-echarts';
+
 import { HeatMapService } from './heat-map.service';
 
 import * as _ from 'lodash';
@@ -19,14 +21,11 @@ export class HeatMapComponent implements OnInit {
   public mobile: any = true;
   constructor(private http: HttpClient, private es: NgxEchartsService, private heatmapService: HeatMapService) { }
 
-
   async ngOnInit() {
     const data = await this.heatmapService.getIprmData();
     const timeline = await this.heatmapService.getIprmData();
     this.initializeChart(data, timeline);
   }
-
-
 
   public initializeChart(data, timeline) {
     data = this.heatmapService.getCountryTotals(data);
@@ -48,13 +47,13 @@ export class HeatMapComponent implements OnInit {
           axisType: 'category',
           data: dates,
           playInterval: 8000,
-          loop: false,
+          loop: true,
           bottom: '2.5%',
           left: '50%',
           symbolSize: 10,
           autoPlay: true,
           tooltip: {
-            show: false
+            show: true
           },
           lineStyle: {
             color: '#ddd'
@@ -96,7 +95,10 @@ export class HeatMapComponent implements OnInit {
           tooltip: {
             trigger: 'item',
             formatter: function (params) {
-              return params.name + ' : ' + params.value;
+              console.log(params);
+              if (params.data.value != null) {
+                return params.data.name + ': ' + params.data.value;
+              }
             }
           },
           grid: {
@@ -155,7 +157,7 @@ export class HeatMapComponent implements OnInit {
                 },
                 emphasis: {
                   label: {
-                    show: false
+                    show: true
                   },
                   areaColor: 'black'
                 }

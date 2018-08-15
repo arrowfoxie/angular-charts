@@ -8,8 +8,6 @@ import * as _ from 'lodash';
 })
 export class HeatMapService {
 
-
-
   constructor(private http: HttpClient) { }
 
   public async getIprmData() {

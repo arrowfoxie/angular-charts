@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { NgxEchartsService } from 'ngx-echarts';
+
 import { SourceIpsService } from './source-ips.service';
 
 import * as _ from 'lodash';
@@ -45,9 +47,9 @@ export class SourceIpsComponent implements OnInit {
                 bottom: '2.5%',
                 left: '40%',
                 symbolSize: 10,
-                autoPlay: false,
+                autoPlay: true,
                 tooltip: {
-                    show: false
+                    show: true
                 },
                 lineStyle: {
                     color: '#ddd'
@@ -135,7 +137,7 @@ export class SourceIpsComponent implements OnInit {
                     min: _.minBy(data, 'value').value,
                     max: _.maxBy(data, 'value').value,
                     dimension: 0,
-                    left: 0,
+                    right: 0,
                     itemWidth: 12,
                     itemHeight: 70,
                     textStyle: {
