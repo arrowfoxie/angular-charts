@@ -137,7 +137,7 @@ export class SourceIpsComponent implements OnInit {
                     min: _.minBy(data, 'value').value,
                     max: _.maxBy(data, 'value').value,
                     dimension: 0,
-                    right: 0,
+                    left: 0,
                     itemWidth: 12,
                     itemHeight: 70,
                     textStyle: {
