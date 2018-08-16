@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { NgxEchartsService } from 'ngx-echarts';
+
 import { ModalService } from '@armor/brandkit';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -9,10 +11,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './zero-state.component.html',
   styleUrls: ['./zero-state.component.scss']
 })
-export class ZeroStateComponent {
+export class ZeroStateComponent implements AfterViewInit {
 
   constructor(private http: HttpClient, private es: NgxEchartsService, ngbModal: NgbModal, private modalService: ModalService) {
   }
+  @ViewChild('content')
+  public modal: ElementRef;
 
   public heatMap: any = {
     series: [
@@ -51,4 +55,10 @@ export class ZeroStateComponent {
   public cancel() {
     this.closeResult = `Dismissed  (Promise Rejected)`;
   }
+
+  public ngAfterViewInit() {
+    this.open(this.modal);
+    console.log('hello');
+  }
+
 }
