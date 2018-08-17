@@ -138,6 +138,7 @@ export class SourceIpsComponent implements OnInit {
                     max: _.maxBy(data, 'value').value,
                     dimension: 0,
                     left: 0,
+                    text: ['High', 'Low'],
                     itemWidth: 12,
                     itemHeight: 70,
                     textStyle: {

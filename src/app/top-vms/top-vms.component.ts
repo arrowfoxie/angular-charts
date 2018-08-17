@@ -150,6 +150,7 @@ export class TopVmsComponent implements OnInit {
                     max: _.maxBy(topValues, 'name').value,
                     dimension: 0,
                     left: 0,
+                    text: ['High', 'Low'],
                     itemWidth: 12,
                     itemHeight: 70,
                     textStyle: {

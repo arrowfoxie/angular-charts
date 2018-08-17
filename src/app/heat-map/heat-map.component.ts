@@ -96,10 +96,10 @@ export class HeatMapComponent implements OnInit {
             trigger: 'item',
             formatter: function (params) {
               console.log(params);
-              if (params.data.value != null) {
-                return params.data.name + ': ' + params.data.value;
-              }
+              if (params.value) {
+                return params.name + ': ' + params.value;
             }
+        }
           },
           grid: {
             left: '30%',
@@ -157,9 +157,10 @@ export class HeatMapComponent implements OnInit {
                 },
                 emphasis: {
                   label: {
-                    show: true
+                    show: true,
+                    color: 'white',
                   },
-                  areaColor: 'black'
+                  areaColor: '#7b8599'
                 }
               },
               data: [],

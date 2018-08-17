@@ -29,7 +29,10 @@ export class ZeroStateComponent implements AfterViewInit {
         },
         itemStyle: {
           emphasis: {
-            areaColor: '#7b8599'
+            areaColor: '#7b8599',
+            label: {
+              color: 'white',
+            }
           },
           normal: {
             areaColor: '#485163',
