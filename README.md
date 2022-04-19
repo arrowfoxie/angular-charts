@@ -1,13 +1,13 @@
+# Charts
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.1.
+
 ## Prerequisites
 
 This project uses nvm to manage its version of node. 
 https://github.com/nvm-sh/nvm
 
 run `nvm install` to install the required version of node.
-
-# Charts
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.1.
 
 ## Development server
 
