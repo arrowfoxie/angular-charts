@@ -36,7 +36,7 @@
     "hopscotch": "^0.2.7",
     "ie-shim": "^0.1.0",
     "jquery": "^3.2.1",
-    "moment": "^2.19.2",
+    "moment": "^2.29.4",
     "natsort": "^1.0.6",
     "ng-click-outside": "^2.3.2",
     "ngx-echarts": "^2.3.1",
